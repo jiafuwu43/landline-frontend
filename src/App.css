@@ -1,0 +1,219 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.App-header a {
+  color: white;
+  text-decoration: none;
+}
+
+.App-header a:hover {
+  text-decoration: underline;
+}
+
+.App-main {
+  flex: 1;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page-container {
+  background: white;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.button-secondary {
+  background-color: #6c757d;
+}
+
+.button-secondary:hover {
+  background-color: #5a6268;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.trip-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: box-shadow 0.3s;
+}
+
+.trip-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.trip-card.selected {
+  border-color: #4CAF50;
+  border-width: 2px;
+}
+
+.trip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.trip-time {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.trip-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4CAF50;
+}
+
+.trip-details {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.trip-availability {
+  color: #666;
+  font-size: 14px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+}
+
+.confirmation-details {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.confirmation-details h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.confirmation-details p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.confirmation-details strong {
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .App-main {
+    padding: 10px;
+  }
+
+  .page-container {
+    padding: 20px;
+  }
+
+  .trip-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trip-price {
+    margin-top: 10px;
+  }
+}
