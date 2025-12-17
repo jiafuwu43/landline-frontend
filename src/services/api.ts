@@ -6,7 +6,13 @@ import { Route, Trip, Seat, SeatsByLevel, Booking, AuthResponse, BookingData, Bo
 // For local development: Uses proxy (via package.json) if available, otherwise direct URL
 const getApiBaseUrl = () => {
   if (process.env.REACT_APP_API_URL) {
-    return process.env.REACT_APP_API_URL;
+    const url = process.env.REACT_APP_API_URL.trim();
+    // Ensure it's an absolute URL (starts with http:// or https://)
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    // If missing protocol, add https://
+    return `https://${url}`;
   }
   
   // In development, use proxy if available (avoids CORS)
