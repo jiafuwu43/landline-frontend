@@ -3,14 +3,31 @@ import { Route, Trip, Seat, SeatsByLevel, Booking, AuthResponse, BookingData, Bo
 
 // Use environment variable with fallback for local development
 // Note: For production on Vercel, you MUST set REACT_APP_API_URL environment variable
-// If not set, it will fallback to localhost (which won't work in production)
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+// For local development: Uses proxy (via package.json) if available, otherwise direct URL
+const getApiBaseUrl = () => {
+  if (process.env.REACT_APP_API_URL) {
+    return process.env.REACT_APP_API_URL;
+  }
+  
+  // In development, use proxy if available (avoids CORS)
+  if (process.env.NODE_ENV === 'development') {
+    // Proxy will forward /api/* to http://localhost:3001/api/*
+    return '/api';
+  }
+  
+  // Fallback for production without env var
+  return 'http://localhost:3001/api';
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: false, // Set to false when using wildcard CORS
+  timeout: 30000, // 30 seconds timeout
 });
 
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -24,10 +41,19 @@ api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    // Handle CORS errors specifically
+    if (error.code === 'ERR_NETWORK' || error.message.includes('CORS')) {
+      throw new Error('CORS error: Unable to connect to server. Please check backend CORS configuration.');
+    }
+    
     if (error.response) {
       const errorMessage = error.response.data.error || 'An error occurred';
       throw new Error(errorMessage);
     } else if (error.request) {
+      // Network error or CORS issue
+      if (error.request.status === 0) {
+        throw new Error('CORS error: Request blocked. Please check backend CORS settings.');
+      }
       throw new Error('Unable to connect to server. Please check your connection.');
     } else {
       throw new Error(error.message || 'An unexpected error occurred');
