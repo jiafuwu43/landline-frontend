@@ -1,6 +1,9 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { Route, Trip, Seat, SeatsByLevel, Booking, AuthResponse, BookingData, BookingUpdates } from '../types';
 
+// Use environment variable with fallback for local development
+// Note: For production on Vercel, you MUST set REACT_APP_API_URL environment variable
+// If not set, it will fallback to localhost (which won't work in production)
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
 
 const api: AxiosInstance = axios.create({
