@@ -62,6 +62,38 @@ function MyBookingsPage() {
     return `${displayHour}:${minutes} ${ampm}`;
   };
 
+  const formatDate = (dateValue: any): string => {
+    if (!dateValue) return 'N/A';
+    
+    let dateStr: string;
+    if (typeof dateValue === 'string') {
+      if (dateValue.includes('T')) {
+        dateStr = dateValue.split('T')[0];
+      } else {
+        dateStr = dateValue;
+      }
+    } else if (dateValue instanceof Date) {
+      dateStr = dateValue.toISOString().split('T')[0];
+    } else {
+      return 'N/A';
+    }
+    
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      return 'N/A';
+    }
+    
+    try {
+      return new Date(dateStr + 'T12:00:00').toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+    } catch (e) {
+      return 'N/A';
+    }
+  };
+
   if (loading) {
     return (
       <div className="page-container">
@@ -98,12 +130,7 @@ function MyBookingsPage() {
                   <div>
                     <h3 style={{ margin: '0 0 10px 0' }}>Booking #{booking.id}</h3>
                     <p><strong>Route:</strong> {origin} → {destination}</p>
-                    <p><strong>Date:</strong> {bookingDate ? new Date(bookingDate + 'T12:00:00').toLocaleDateString('en-US', { 
-                      weekday: 'long', 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    }) : 'N/A'}</p>
+                    <p><strong>Date:</strong> {formatDate(bookingDate)}</p>
                     {departureTime && <p><strong>Departure:</strong> {formatTime(departureTime)}</p>}
                     {arrivalTime && <p><strong>Arrival:</strong> {formatTime(arrivalTime)}</p>}
                     <p><strong>Passenger:</strong> {booking.passenger_name}</p>
