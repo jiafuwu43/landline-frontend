@@ -86,7 +86,7 @@ function ConfirmationPage() {
         )}
         <hr style={{ margin: '20px 0', border: 'none', borderTop: '1px solid #ddd' }} />
         <p><strong>Route:</strong> {origin} → {destination}</p>
-        <p><strong>Date:</strong> {new Date(date).toLocaleDateString('en-US', { 
+        <p><strong>Date:</strong> {new Date(date + 'T12:00:00').toLocaleDateString('en-US', { 
           weekday: 'long', 
           year: 'numeric', 
           month: 'long', 

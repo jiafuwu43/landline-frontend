@@ -295,7 +295,7 @@ function BookingPage() {
 
       <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
         <div><strong>Route:</strong> {origin} → {destination}</div>
-        <div><strong>Date:</strong> {new Date(date).toLocaleDateString('en-US', { 
+        <div><strong>Date:</strong> {new Date(date + 'T12:00:00').toLocaleDateString('en-US', { 
           weekday: 'long', 
           year: 'numeric', 
           month: 'long', 
