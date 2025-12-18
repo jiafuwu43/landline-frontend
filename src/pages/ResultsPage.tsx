@@ -28,9 +28,12 @@ function ResultsPage() {
     try {
       setLoading(true);
       setError(null);
+      console.log('Searching for trips:', { origin, destination, date });
       const tripsData = await searchSchedules(origin, destination, date);
+      console.log('Trips received:', tripsData);
       setTrips(tripsData);
     } catch (err) {
+      console.error('Error loading trips:', err);
       setError(err instanceof Error ? err.message : 'Failed to load trips');
     } finally {
       setLoading(false);
@@ -75,7 +78,7 @@ function ResultsPage() {
 
       <div style={{ marginBottom: '20px', color: '#666' }}>
         <strong>{origin}</strong> → <strong>{destination}</strong> on{' '}
-        <strong>{new Date(date).toLocaleDateString('en-US', { 
+        <strong>{new Date(date + 'T12:00:00').toLocaleDateString('en-US', { 
           weekday: 'long', 
           year: 'numeric', 
           month: 'long', 

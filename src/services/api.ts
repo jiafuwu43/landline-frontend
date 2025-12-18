@@ -67,9 +67,11 @@ export const searchSchedules = async (
   destination: string,
   date: string
 ): Promise<Trip[]> => {
+  console.log('API call - searchSchedules:', { origin, destination, date, baseURL: API_BASE_URL });
   const response = await api.get<Trip[]>('/schedules/search', {
     params: { origin, destination, date },
   });
+  console.log('API response:', response.data);
   return response.data;
 };
 

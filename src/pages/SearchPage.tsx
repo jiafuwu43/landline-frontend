@@ -71,9 +71,16 @@ function SearchPage() {
       return;
     }
 
-    const selectedDate = new Date(formData.date + 'T00:00:00');
+    const selectedDate = new Date(formData.date + 'T12:00:00');
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    today.setHours(12, 0, 0, 0);
+
+    console.log('Date validation:', { 
+      selectedDate: formData.date, 
+      selectedDateObj: selectedDate.toISOString(),
+      today: today.toISOString(),
+      isValid: selectedDate >= today 
+    });
 
     if (selectedDate < today) {
       setError('Please select today or a future date');
