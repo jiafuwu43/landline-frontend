@@ -98,12 +98,12 @@ function MyBookingsPage() {
                   <div>
                     <h3 style={{ margin: '0 0 10px 0' }}>Booking #{booking.id}</h3>
                     <p><strong>Route:</strong> {origin} → {destination}</p>
-                    <p><strong>Date:</strong> {new Date(bookingDate).toLocaleDateString('en-US', { 
+                    <p><strong>Date:</strong> {bookingDate ? new Date(bookingDate + 'T12:00:00').toLocaleDateString('en-US', { 
                       weekday: 'long', 
                       year: 'numeric', 
                       month: 'long', 
                       day: 'numeric' 
-                    })}</p>
+                    }) : 'N/A'}</p>
                     {departureTime && <p><strong>Departure:</strong> {formatTime(departureTime)}</p>}
                     {arrivalTime && <p><strong>Arrival:</strong> {formatTime(arrivalTime)}</p>}
                     <p><strong>Passenger:</strong> {booking.passenger_name}</p>
