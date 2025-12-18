@@ -75,13 +75,6 @@ function SearchPage() {
     const today = new Date();
     today.setHours(12, 0, 0, 0);
 
-    console.log('Date validation:', { 
-      selectedDate: formData.date, 
-      selectedDateObj: selectedDate.toISOString(),
-      today: today.toISOString(),
-      isValid: selectedDate >= today 
-    });
-
     if (selectedDate < today) {
       setError('Please select today or a future date');
       return;
